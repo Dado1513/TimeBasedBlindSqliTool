@@ -38,7 +38,7 @@ def checkVariableInjectable():
     OptionConfiguration.tempoMedioConnessione=sum(timeConnessione)/5
     tempoMassimo=max(timeConnessione)
     # ottimizzo il tempo di connessione
-    OptionConfiguration.timeToWait=int(tempoMassimo*5)+2;
+    OptionConfiguration.timeToWait=int(tempoMassimo*5)+1;
     #OptionConfiguration.timeToWait=int(tempoMassimo*30)+1
     #print (OptionConfiguration.timeToWait);
     # il metodo di invio scelto e il POST
@@ -793,10 +793,10 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
             print "*",
         print ("")
         # senza thread
-        #valori.append(ricostruisciParolaPOST(length,nomeTabella,nomeColonna,i,condizioneWhere))
+        valori.append(ricostruisciParolaPOST(length,nomeTabella,nomeColonna,i,condizioneWhere))
         # con i thread
-        value = threadStart(length, nomeTabella, nomeColonna, i, condizioneWhere)
-        valori.append(value)
+        #value = threadStart(length, nomeTabella, nomeColonna, i, condizioneWhere)
+        #valori.append(value)
     return valori
 
 def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere):
@@ -977,10 +977,10 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
         for l in range(length):
             print "*",
         print ("")
-        #valori.append(ricostruisciParolaGET(length,nomeTabella,nomeColonna,i,condizioneWhere))
+        valori.append(ricostruisciParolaGET(length,nomeTabella,nomeColonna,i,condizioneWhere))
         # da controllare le pwd siccome la prima me la sbaglia sempre
-        value=threadStart(length,nomeTabella,nomeColonna,i,condizioneWhere)
-        valori.append(value)
+        #value=threadStart(length,nomeTabella,nomeColonna,i,condizioneWhere)
+        #valori.append(value)
     return valori
 
 
@@ -1400,17 +1400,59 @@ def threadStart(length,nomeTabella,nomeColonna,indice,condizioneWhere):
     # rivedere questa parte per le password
     # non funziona a volte
     for i in range(1,length+1):
-        if(OptionConfiguration.methodSentData=="GET"):
-            t=threading.Thread(name=str(i),target=pythonThreadRicostruisciParola.ricostruisciParolaGET,args=(i,nomeTabella,nomeColonna,indice,condizioneWhere,))
-            t.start()
-            threads.append(t)
-        else:
-            t = threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
-                                 args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
-            t.start()
-            threads.append(t)
+        if(length+1-i>4):
+            if(OptionConfiguration.methodSentData=="GET"):
+                t1=threading.Thread(name=str(i),target=pythonThreadRicostruisciParola.ricostruisciParolaGET,args=(i,nomeTabella,nomeColonna,indice,condizioneWhere,))
+                t2 = threading.Thread(name=str(i+1), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
+                                      args=(i+1, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t3 = threading.Thread(name=str(i+2), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
+                                      args=(i+2, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t4 = threading.Thread(name=str(i+3), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
+                                      args=(i+3, nomeTabella, nomeColonna, indice, condizioneWhere,))
 
-            # t.join()
+                t1.start()
+                t2.start()
+                t3.start()
+                t4.start()
+                t1.join()
+                t2.join()
+                t3.join()
+                t4.join()
+                i=i+3
+
+            else:
+                t1 = threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
+                                      args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t2 = threading.Thread(name=str(i + 1), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
+                                      args=(i + 1, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t3 = threading.Thread(name=str(i + 2), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
+                                      args=(i + 2, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t4 = threading.Thread(name=str(i + 3), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
+                                      args=(i + 3, nomeTabella, nomeColonna, indice, condizioneWhere,))
+
+                t1.start()
+                t2.start()
+                t3.start()
+                t4.start()
+                t1.join()
+                t2.join()
+                t3.join()
+                t4.join()
+                i = i + 3
+        else:
+            for j in (length+1)%i:
+                if (OptionConfiguration.methodSentData == "GET"):
+                    t=threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
+                                      args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                    t.start()
+                    threads.append(t)
+                else:
+                    t = threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
+                                         args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                    t.start()
+                    threads.append(t)
+
+            i=length+1
 
     for t in threads:
         t.join()
@@ -1634,7 +1676,7 @@ def searchAllValueOfColumn(nomeColonna,nomeTabella,nomeDb):
     elif(OptionConfiguration.methodSentData == "POST"):
         valore = seqOfAsciiCode(nomeColonna)
         whereEsistenzaColonna = informationSchema.colonnaNomeColonne + "= CHAR(" + valore + ")"
-        check = countValueofTableGet(informationSchema.tabellaWithColumns, whereEsistenzaColonna)
+        check = countValueofTablePost(informationSchema.tabellaWithColumns, whereEsistenzaColonna)
 
         if (check > 0):
 
