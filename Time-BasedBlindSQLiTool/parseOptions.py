@@ -67,6 +67,7 @@ def help():
     --fielInjectable = name of fiel injectable se conosciuto
                         example:
                         --fielInjectable=email
+    --thread=YES o NO
 
 
     Example:
@@ -89,7 +90,7 @@ def parseOptions(args):
     attacco=False
     try:
 
-        options,destination=getopt.getopt(args,"htcda",['method=','data=','columns=','table=','dbs=','fieldInjectable='],)
+        options,destination=getopt.getopt(args,"htcda",['method=','data=','columns=','table=','dbs=','fieldInjectable=','thread='],)
         if(destination):
             OptionConfiguration.destination=destination;
         else:
@@ -143,6 +144,15 @@ def parseOptions(args):
 
             elif (opt[0] == "--dbs"):
                 OptionConfiguration.nameDb=opt[1]
+            elif(opt[0]=="--thread"):
+                if(opt[1]=="YES"):
+                    OptionConfiguration.thread="YES"
+                elif(opt[1]=="NO"):
+                    OptionConfiguration.thread="NO"
+                else:
+                    print (help())
+                    import sys
+                    sys.exit(0)
 
 
             else:

@@ -11,7 +11,9 @@ def main():
     #aggiungere controllo se il sito e raggiungibile o meno
     import requests
     try:
-        request = requests.get(OptionConfiguration.destination[0])
+
+        request = requests.get(OptionConfiguration.destination[0],timeout=5)
+        print(requests)
     except:
         print (OptionConfiguration.bcolors.BOLD+OptionConfiguration.bcolors.FAIL+"Page %s no available"%(OptionConfiguration.destination)+OptionConfiguration.bcolors.ENDC)
         sys.exit(0)

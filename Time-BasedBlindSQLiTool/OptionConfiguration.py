@@ -26,6 +26,8 @@ typeOfValue=""
 # tempo standard time wait
 timeToWait=5
 
+thread="NO"
+
 tempoMedioConnessione=0
 
 
