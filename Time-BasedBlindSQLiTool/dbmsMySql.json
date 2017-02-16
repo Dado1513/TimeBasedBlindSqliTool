@@ -1,0 +1,10 @@
+{
+    "tabellaDB": "INFORMATION_SCHEMA.SCHEMATA", 
+    "colonnaNomeTabelle": "TABLE_NAME", 
+    "condizioneSulDb": "table_schema", 
+    "colonnaNomeColonne": "COLUMN_NAME", 
+    "condizioniNomeColonna": "TABLE_NAME", 
+    "tabellaWithColumns": "INFORMATION_SCHEMA.COLUMNS", 
+    "tabelleContienteNameTabelle": "INFORMATION_SCHEMA.TABLES", 
+    "colonnaNomeDb": "SCHEMA_NAME"
+}
