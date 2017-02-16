@@ -12,23 +12,27 @@ def main():
     import requests
     try:
 
-        request = requests.get(OptionConfiguration.destination[0],timeout=5)
-        print(requests)
+        requests.get(OptionConfiguration.destination[0],timeout=5)
+        #print(requests)
     except:
+
         print (OptionConfiguration.bcolors.BOLD+OptionConfiguration.bcolors.FAIL+"Page %s no available"%(OptionConfiguration.destination)+OptionConfiguration.bcolors.ENDC)
         sys.exit(0)
 
     if(sqliAttack.checkVariableInjectable()):
+
         print(OptionConfiguration.bcolors.BOLD+"Field '%s' appear injectable on Time-Based Blind SQLi (%s)"%(OptionConfiguration.valueInjectable,OptionConfiguration.typeOfValue)+OptionConfiguration.bcolors.ENDC)
         print(OptionConfiguration.bcolors.BOLD+OptionConfiguration.bcolors.FAIL+"Please don't use the network for greater accuracy"+OptionConfiguration.bcolors.ENDC)
 
 
         # ricerca in base al tipo di attacco
         if(OptionConfiguration.typeOfAttack=="d"):
+
             print ("Search all db")
             sqliAttack.searchNameAlldb()
 
         elif(OptionConfiguration.typeOfAttack=="t"):
+
             if(OptionConfiguration.nameDb!=""):
                 print ("Search all table of %s")%(OptionConfiguration.nameDb)
                 sqliAttack.searchAllTableName(OptionConfiguration.nameDb)
@@ -36,6 +40,7 @@ def main():
                 print(OptionConfiguration.bcolors.FAIL+"Please insert a db name"+OptionConfiguration.bcolors.ENDC)
 
         elif(OptionConfiguration.typeOfAttack=="c"):
+
             if(OptionConfiguration.nameTable!=""):
                 print ("Search all column of %s")%(OptionConfiguration.nameTable)
                 sqliAttack.searchAllColumnOfTable(OptionConfiguration.nameTable)
